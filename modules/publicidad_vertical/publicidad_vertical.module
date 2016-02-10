@@ -1,0 +1,43 @@
+<?php
+
+/**
+ *@file
+ *article.module
+ *
+ */
+function publicidad_vertical_block_info(){
+  // This example comes from node.module.
+  $blocks['articles'] = array(
+    'info' => t('Publicidad Vertical Module'),
+  );
+
+  return $blocks;
+}
+
+function publicidad_vertical_block_view($delta = '') {
+  // This example is adapted from node.module.
+  $block = array();
+
+  switch ($delta) {
+    case 'articles':
+      Global $base_url;
+
+      // Agregar funcionalidad (desde bd) de la publicidad
+      // Get current path
+      $path = current_path();
+      if($path == "node/6"){
+        $section = "
+          <a href='http://www.uaem.mx/' target='_blank'>
+            <div class='publicidad_vertical_container' id='home_publicidad_vertical'>
+              <!-- <p class='publicidad_vertical_text'> Publicidad </p> -->
+            </div>
+          </a>
+        ";
+        $block['subject'] = t(''); //This is publicidad vertical Block
+        $block['content'] = $section;
+      }
+    
+      break;
+  }
+  return $block;
+}

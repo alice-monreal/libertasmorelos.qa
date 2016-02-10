@@ -1,0 +1,57 @@
+<?php
+
+/**
+ *@file
+ *article.module
+ *
+ */
+function publicidad_horizontal_block_info(){
+  // This example comes from node.module.
+  $blocks['articles'] = array(
+    'info' => t('Publicidad Horizontal Module'),
+  );
+
+  return $blocks;
+}
+
+function publicidad_horizontal_block_view($delta = '') {
+  // This example is adapted from node.module.
+  $block = array();
+
+  switch ($delta) {
+    case 'articles':
+      Global $base_url;
+
+      // Agregar funcionalidad (desde bd) de la publicidad
+
+      // Get current path
+      $path = current_path();
+      if($path == "node/6"){
+        $page_add = 'home_publicidad_horizontal';
+        $page_add_link = 'http://jardinesdemexico.com/';
+      }
+      if($path == "node/12"){
+        $page_add = 'adds_publicidad_horizontal';
+        $page_add_link = 'http://www.uaem.mx/';
+      }
+      if($path == "node/5"){
+        $page_add = 'contact_publicidad_horizontal';
+        $page_add_link = 'http://jardinesdemexico.com/';
+      }
+
+      if($path == "node/6" || $path == "node/12" || $path == "node/5"){
+        $section = "
+          <a href='".$page_add_link."' target='_blank'>
+            <div class='publicidad_horizontal_container'id='".$page_add."'>
+              <!-- <p class='publicidad_horizontal_text'> Publicidad </p> -->
+            </div>
+          </a>
+        ";
+        $block['subject'] = t(''); //This is publicidad horizontal Block
+        $block['content'] = $section;
+      }
+      
+      break;
+  }
+  return $block;
+}
